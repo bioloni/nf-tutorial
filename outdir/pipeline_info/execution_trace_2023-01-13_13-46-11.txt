@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	99/d2e56c	1998	NFCORE_TESTPIPELINE:TESTPIPELINE:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_amplicon.csv)	FAILED	126	2023-01-13 13:46:29.562	48ms	44ms	-	-	-	-	-

@@ -1,0 +1,7 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	SAMPLE3_SE_T1	/workspace/nf-tutorial/work/43/91f7275363a8be5466cefd1b4020e8/SAMPLE3_SE_T1_fastqc.zip
+FastQC	all_sections	SAMPLE3_SE_T2	/workspace/nf-tutorial/work/43/91f7275363a8be5466cefd1b4020e8/SAMPLE3_SE_T2_fastqc.zip
+FastQC	all_sections	SAMPLE1_PE_T1_1	/workspace/nf-tutorial/work/43/91f7275363a8be5466cefd1b4020e8/SAMPLE1_PE_T1_1_fastqc.zip
+FastQC	all_sections	SAMPLE1_PE_T1_2	/workspace/nf-tutorial/work/43/91f7275363a8be5466cefd1b4020e8/SAMPLE1_PE_T1_2_fastqc.zip
+FastQC	all_sections	SAMPLE2_PE_T1_1	/workspace/nf-tutorial/work/43/91f7275363a8be5466cefd1b4020e8/SAMPLE2_PE_T1_1_fastqc.zip
+FastQC	all_sections	SAMPLE2_PE_T1_2	/workspace/nf-tutorial/work/43/91f7275363a8be5466cefd1b4020e8/SAMPLE2_PE_T1_2_fastqc.zip
