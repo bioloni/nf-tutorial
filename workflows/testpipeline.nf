@@ -46,9 +46,10 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 //
 // MODULE: Installed directly from nf-core/modules
 //
-include { FASTQC                      } from '../modules/nf-core/modules/fastqc/main'
-include { MULTIQC                     } from '../modules/nf-core/modules/multiqc/main'
-include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/modules/custom/dumpsoftwareversions/main'
+include { FASTQC                      } from '../modules/nf-core/fastqc/main'
+include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
+include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
+include { BWA_MEM                     } from '../modules/nf-core/bwa/mem/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,6 +80,19 @@ workflow TESTPIPELINE {
     )
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
+    ch_index = file("/workspace/nf-tutorial/testpipeline/dataset/GCF_000146045.2_R64_genomic.fna.gz")
+    ch_meta2 = { id : "index_meta" }
+
+    ch_index_meta = tuple(ch_meta2, ch_index)
+
+    sort_bam = true
+    BWA_MEM(
+        INPUT_CHECK.out.reads, ch_index_meta, sort_bam
+    )
+    ch_versions = ch_versions.mix(BWA_MEM.out.versions)
+
+
+
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
     )
@@ -95,6 +109,8 @@ workflow TESTPIPELINE {
     ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
+   // ch_multiqc_files = ch_multiqc_files.mix(BWA_MEM.out.bam)
+
 
     MULTIQC (
         ch_multiqc_files.collect()
