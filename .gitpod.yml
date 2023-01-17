@@ -7,6 +7,7 @@ tasks:
         sudo mv nextflow /usr/local/bin/
         pip install tiptop
         pip install nf-core
+        conda install -c bioconda fastqc bwa multiqc
 
 vscode:
   extensions: # based on nf-core.nf-core-extensionpack
